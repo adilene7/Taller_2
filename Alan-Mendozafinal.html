@@ -1,0 +1,371 @@
+{
+ "cells": [
+  {
+   "cell_type": "markdown",
+   "metadata": {
+    "slideshow": {
+     "slide_type": "slide"
+    }
+   },
+   "source": [
+    "# Intro al análisis de datos - ICC732\n",
+    "## Taller 2"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "### Instrucciones"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "## **Equipos**\n",
+    "- Trabaje en grupos de 3 integrantes.\n",
+    "- No se aceptan grupos de 4 integrantes\n",
+    "- Si no cumple este requisito contacte al profesor.\n",
+    "\n",
+    "**Evaluación**\n",
+    "- Parte 1: 6 tareas -> 0-3 puntos cada una.\n",
+    "- Parte 2: 1 tarea  -> 0-3 puntos cada una.\n",
+    "- Parte 3: 4 tareas -> 0-3 puntos cada una.\n",
+    "\n",
+    "**Reglamento**\n",
+    "- Preguntas similares entre grupos, reciben nota mínima.\n",
+    "- Puede usar herramientas de asistencia para responder su taller, pero debe adaptar el código al contexto que este taller exige.\n",
+    "- Marque con una **X** si herramientas del tipo chatGPT para responder este taller: (**X**) Sí, () No.\n",
+    "- No se revisarán entregas enviadas por Discord o correo electrónico.\n",
+    "\n",
+    "**Disponibilidad del Taller**\n",
+    "- Desde: Lunes 2 de Octubre, 16:50.\n",
+    "- Hasta: Miércoles 4 de Octubre: 23:00.\n",
+    "\n",
+    "**Hint**\n",
+    "- Documente métodos y clases\n",
+    "\n",
+    "**Formato de entrega**\n",
+    "- Apellido1-Apellido2-Apellido3.ipynb (ejecutable)\n",
+    "- Apellido1-Apellido2-Apellido3.html\n",
+    "- Solo 1 integrante sube el taller al campus virtual.\n",
+    "- Crear respositorio GitHub: https://github.com/adilene7/Alan_Mendoza-Taller2.git "
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "## Juego\n",
+    "\n",
+    "#### **Clases**\n",
+    "- 1 clase denominada ``Dron``:\n",
+    "    - representa un Dron en un juego de mesa.\n",
+    "    - consta de dos parámetros que lo identifican: nombre y posición.\n",
+    "    - se inicializa en ``0,0`` con nombres ``Timon`` y ``Sid``\n",
+    "\n",
+    "- 1 clase denominada ``Tablero``:\n",
+    "    - que representa un tablero de juego de mesa.\n",
+    "    - tiene tamaño que se representa por: x e y.\n",
+    "    - se inicializa en tamaño ``50,50``\n",
+    "\n",
+    "#### **Comportamiento**\n",
+    "- El dron se mueve en 4 direcciones: arriba, abajo, izquierda, derecha\n",
+    "- En el trablero, el dron puede lanzar bombas\n",
+    "\n",
+    "#### **Jugada**\n",
+    "- Una juagada representa el juego en marcha.\n",
+    "- Primero se mueven los drones en diferentes direcciones\n",
+    "- Luego, cada dron lanza una bomba\n",
+    "- Si la posición de la bomba lanzada por un dron coincide con la posicion del rival, entonces el dron gana."
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "#### 1 - Clase Dron\n",
+    "\n",
+    "- Cree la clase Dron\n",
+    "- Implemente la clase.\n",
+    "    - ``Dron``\n",
+    "- Implemente los métodos\n",
+    "    - ``mover_arriba``, ``mover_abajo``, ``mover_izquierda``, ``mover_arriba``, y  ``lanzar_bomba``."
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 2,
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "<__main__.Dron object at 0x0000021642DDBC50>\n",
+      "<__main__.Dron object at 0x0000021642DD8610>\n",
+      "Posición de Timon: (0, 0)\n",
+      "Posición de Sid: (0, 0)\n"
+     ]
+    }
+   ],
+   "source": [
+    "#Definir la clase dron\n",
+    "class Dron():\n",
+    "    def __init__(self, name, x=0, y=0):\n",
+    "        self.x = x\n",
+    "        self.y = y\n",
+    "        self.name = name\n",
+    "    def move_dron(self, x_movement, y_movement):\n",
+    "        self.x += x_movement\n",
+    "        self.y += y_movement\n",
+    "    def lanzar_bomba(self, bombax, bombay):\n",
+    "        bomba = Bomba(bombax, bombay) \n",
+    "        return bomba\n",
+    "\n",
+    "#Se crea Dron: Timon\n",
+    "dron_uno=Dron(\"Timon\")\n",
+    "\n",
+    "# Se crea Dron: Sid\n",
+    "dron_dos=Dron(\"Sid\")\n",
+    "\n",
+    "print(dron_uno)\n",
+    "print(dron_dos)\n",
+    "\n",
+    "print(f\"Posición de Timon: ({dron_uno.x}, {dron_uno.y})\")\n",
+    "print(f\"Posición de Sid: ({dron_dos.x}, {dron_dos.y})\")\n",
+    "\n",
+    "\n"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "#### 2 - Clase Tablero\n",
+    "\n",
+    "- Implemente la clase Tablero\n",
+    "    - tiene tamaño que se representa por: x e y.\n",
+    "    - se inicializa en tamaño ``50,50``"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 5,
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "<__main__.tablero object at 0x0000021642DDCC50>\n"
+     ]
+    }
+   ],
+   "source": [
+    "#Definir la clase Tablero\n",
+    "class tablero():\n",
+    "    # Condiciones iniciales\n",
+    "    def __init__(self, x=50, y=50): \n",
+    "        self.x = x\n",
+    "        self.y = y\n",
+    "\n",
+    "tablero_juego=tablero()\n",
+    "print(tablero_juego)"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "#### 3 - Jugada\n",
+    "\n",
+    "- Implemente una jugada (con o sin clase)\n",
+    "- Mueva los drones en cierta dirección.\n",
+    "- Debe atacar lanzando bombas.\n",
+    "- Uno de los drones debe ganar y hacer un anuncio al respecto."
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 7,
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "**Comienza Timon, moviendose y tirando la bomba.**\n",
+      "Posición de Timon: (-3, 2)\n",
+      "Posición de Sid: (0, 0)\n",
+      "Bomba1: (5, 5)\n",
+      "Tiro fallido, turno de Sid\n",
+      "-----------------------------------------------\n",
+      "Posición de Sid: (15, 6)\n",
+      "Bomba2: (3, 2)\n",
+      "Posición de Timon: (-3, 2)\n",
+      "Tiro fallido, turno de Timon\n",
+      "-----------------------------------------------\n",
+      "Posición de Timon: (-3, -2)\n",
+      "Posición de Sid: (15, 6)\n",
+      "Bomba1: (-15, 6)\n",
+      "Tiro fallido, turno de Sid\n",
+      "-----------------------------------------------\n",
+      "Posición de Sid: (3, -2)\n",
+      "Posición de Timon: (-3, -2)\n",
+      "Bomba2: (-3, -2)\n",
+      "¡objetivo derrivado, Sid is winner!\n"
+     ]
+    }
+   ],
+   "source": [
+    "#Definir clase Dron\n",
+    "class Dron():\n",
+    "    # Se inicializa posiciones de Dron\n",
+    "    def __init__(self, name, x=0, y=0):\n",
+    "        self.x = x\n",
+    "        self.y = y\n",
+    "        self.name = name\n",
+    "    \n",
+    "    def move_dron(self, x_movement, y_movement):\n",
+    "        self.x += x_movement\n",
+    "        self.y += y_movement\n",
+    "\n",
+    "    def lanzar_bomba(self, bombax, bombay):\n",
+    "        bomba = Bomba(bombax, bombay)  \n",
+    "        return bomba\n",
+    "# Definir clase bomba\n",
+    "class Bomba():\n",
+    "    def __init__(self, x, y):\n",
+    "        self.x = x\n",
+    "        self.y = y\n",
+    "\n",
+    "print(\"**Comienza Timon, moviendose y tirando la bomba.**\")\n",
+    "\n",
+    "# Restablecer coordenadas de Timon\n",
+    "dron_uno = Dron(\"Timon\", x=-3, y=2)\n",
+    "\n",
+    "# Mostrar posición de Timon\n",
+    "print(f\"Posición de Timon: ({dron_uno.x}, {dron_uno.y})\")\n",
+    "\n",
+    "# Mostrar posición de Sid\n",
+    "dron_dos = Dron(\"Sid\", x=0, y=0)\n",
+    "print(f\"Posición de Sid: ({dron_dos.x}, {dron_dos.y})\")\n",
+    "\n",
+    "# Lanzar bomba_uno\n",
+    "bomba_uno = dron_uno.lanzar_bomba(5, 5)\n",
+    "\n",
+    "# Mostrar coordenadas de Bomba1\n",
+    "print(f\"Bomba1: ({bomba_uno.x}, {bomba_uno.y})\")\n",
+    "\n",
+    "# Condición\n",
+    "# Si las coordenadas de la Bomba1 conciden con las coordenadas de Sid\n",
+    "if (bomba_uno.x == dron_dos.x and bomba_uno.y == dron_dos.y):\n",
+    "    print(\"¡objetivo derrivado!\")\n",
+    "#Sino\n",
+    "else:\n",
+    "    print(\"Tiro fallido, turno de Sid\")\n",
+    "\n",
+    "print(\"-----------------------------------------------\")\n",
+    "\n",
+    "# Restablecer posición de Sid\n",
+    "dron_dos = Dron(\"Sid\", x=15, y=6)\n",
+    "\n",
+    "# Lanzar bomba_dos\n",
+    "bomba_dos = dron_dos.lanzar_bomba(3, 2)\n",
+    "\n",
+    "# Mostrar posición de Sid\n",
+    "print(f\"Posición de Sid: ({dron_dos.x}, {dron_dos.y})\")\n",
+    "\n",
+    "# Mostrar posiciones de Bomba2\n",
+    "print(f\"Bomba2: ({bomba_dos.x}, {bomba_dos.y})\")\n",
+    "\n",
+    "# Mostrar posiciones de Timon\n",
+    "print(f\"Posición de Timon: ({dron_uno.x}, {dron_uno.y})\")\n",
+    "\n",
+    "# Si las coordenadas de la Bomba2 coinciden con las coordenadas de Timon \n",
+    "if (bomba_dos.x == dron_uno.x and bomba_dos.y == dron_uno.y):\n",
+    "    print(\"¡objetivo derrivado, Sid is winners!\")\n",
+    "# Sino\n",
+    "else:\n",
+    "    print(\"Tiro fallido, turno de Timon\")\n",
+    "\n",
+    "print(\"-----------------------------------------------\")\n",
+    "\n",
+    "# Restablecer posición de Timon\n",
+    "dron_uno = Dron(\"Timon\", x=-3, y=-2)\n",
+    "\n",
+    "# Mostrar posición de Timon\n",
+    "print(f\"Posición de Timon: ({dron_uno.x}, {dron_uno.y})\")\n",
+    "\n",
+    "# Mostrar posición de Sid\n",
+    "print(f\"Posición de Sid: ({dron_dos.x}, {dron_dos.y})\")\n",
+    "\n",
+    "#Lanzar bomba_uno\n",
+    "bomba_uno = dron_uno.lanzar_bomba(-15, 6)\n",
+    "\n",
+    "# Mostrar posiciones de Bomba1\n",
+    "print(f\"Bomba1: ({bomba_uno.x}, {bomba_uno.y})\")\n",
+    "\n",
+    "# Si las coordenadas de bomba_uno coinciden con coordenadas de Sid\n",
+    "if (bomba_uno.x == dron_dos.x and bomba_uno.y == dron_dos.y):\n",
+    "    print(\"¡objetivo derrivado!\")\n",
+    "#Sino\n",
+    "else:\n",
+    "    print(\"Tiro fallido, turno de Sid\")\n",
+    "\n",
+    "print(\"-----------------------------------------------\")\n",
+    "\n",
+    "# Restablecer coordenadas de Sid\n",
+    "dron_dos = Dron(\"Sid\", x=3, y=-2)\n",
+    "\n",
+    "# Mostrar posiciones de Sid\n",
+    "print(f\"Posición de Sid: ({dron_dos.x}, {dron_dos.y})\")\n",
+    "\n",
+    "# Mostrar las posiciones de Timon\n",
+    "print(f\"Posición de Timon: ({dron_uno.x}, {dron_uno.y})\")\n",
+    "\n",
+    "# Lanzar bomba_dos\n",
+    "bomba_dos = dron_dos.lanzar_bomba(-3, -2)\n",
+    "\n",
+    "# Mostrar coordenadas de Bomba2\n",
+    "print(f\"Bomba2: ({bomba_dos.x}, {bomba_dos.y})\")\n",
+    "\n",
+    "#Si las coordenadas de bomba_dos coinden con las coordenadas de Timon\n",
+    "if (bomba_dos.x == dron_uno.x and bomba_dos.y == dron_uno.y):\n",
+    "    print(\"¡objetivo derrivado, Sid is winner!\")\n",
+    "#Sino   \n",
+    "else:\n",
+    "    print(\"Tiro fallido, turno de Timon\")\n",
+    "\n",
+    "\n",
+    "\n",
+    "\n",
+    "\n",
+    "\n"
+   ]
+  }
+ ],
+ "metadata": {
+  "kernelspec": {
+   "display_name": "Python 3 (ipykernel)",
+   "language": "python",
+   "name": "python3"
+  },
+  "language_info": {
+   "codemirror_mode": {
+    "name": "ipython",
+    "version": 3
+   },
+   "file_extension": ".py",
+   "mimetype": "text/x-python",
+   "name": "python",
+   "nbconvert_exporter": "python",
+   "pygments_lexer": "ipython3",
+   "version": "3.11.4"
+  }
+ },
+ "nbformat": 4,
+ "nbformat_minor": 4
+}
